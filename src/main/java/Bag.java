@@ -13,9 +13,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
-
-
-
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
     /*
      * TODO: Create a constructor that takes two arguments:
@@ -26,9 +27,12 @@ public abstract class Bag {
      * be empty (e.g. numberOfContents is 0 and an empty String array for
      * its contents.)
      */
-
-
-
+    public Bag(String color, int capacity){
+        this.numberOfContents = 0;
+        this.capacity = capacity;
+        this.color = color;
+        this.contents = new String[capacity];
+    }
 
     /*
      * TODO: Create a variety of 'getter' functions.
@@ -38,17 +42,26 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return this.color;
+    }
 
+    public int getCapacity() {
+        return this.capacity;
+    }
 
+    public int getNumberOfContents() {
+        return this.numberOfContents;
+    }
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
-
-
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     /*
      * TODO: Create a method called addItem that takes in a String
@@ -61,7 +74,12 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
-
+   public void addItem(String item){
+       if(this.getNumberOfContents() < this.capacity){
+           this.contents[this.getNumberOfContents()] = item;
+           this.numberOfContents++;
+       }
+   }
 
 
 
@@ -75,9 +93,21 @@ public abstract class Bag {
      *
      * @return
      */
+    public String popItem(){
 
+        if(numberOfContents > 0 ){
+            String remove = this.contents[numberOfContents - 1];
+            this.contents[numberOfContents - 1] = "";
+            numberOfContents -= 1;
+            return remove;
+        }else if(numberOfContents == 0){
+            String remove = this.contents[numberOfContents];
+            this.contents[numberOfContents] = null;
+            return remove;
+        }
 
-
+        return null;
+    }
 
 
     /**
@@ -87,7 +117,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        this.capacity += n;
     }
 
     /**
